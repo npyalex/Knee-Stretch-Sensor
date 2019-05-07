@@ -8,10 +8,9 @@ int sensorValue;
 int mappedValue;
 
 void setup() {
-  size(1000, 800);
+  size(2000, 1800);
   // List all the available serial ports in the console
- printArray(Serial.list()); // uncomment this to view your port Amaria
-
+  printArray(Serial.list()); // uncomment this to view your port
   // Change the 0 to the appropriate number of the serial port
   // that your microcontroller is attached to.
   String portName = Serial.list()[0];
@@ -22,6 +21,7 @@ void setup() {
 }
 
 void draw(){
+
   background (0);
   rectMode(CENTER);
   stroke(fillColour1, fillColour2, fillColour3);
@@ -35,7 +35,13 @@ void draw(){
   curveVertex(width*0.75, rectWidth);
   curveVertex(500, height/2);
   endShape(); */
-  rect(width/2, height*0.25, rectWidth, 30);
+  textSize(32);
+  text(mappedValue, 700, 500);
+  rotate(radians(135));
+  translate(0,0);
+  lineAngle(500, 400, rectWidth, 100);
+//  rect(width/2, height*0.25, rectWidth, 30);
+
   noFill();
 //  curve(width/2, -rectWidth, 100, height/2, 900, height/2, width/2, -rectWidth);
   rectWidth = mappedValue;
@@ -68,5 +74,12 @@ void dangerZone(){
     fillColour1 = 255;
     fillColour2 = 0;
     fillColour3 = 0;
-  }
+  } 
+}
+
+void lineAngle(int x, int y, float angle, float radius){
+  //line(x,y, x+cos(angle)*length, y-sin(angle)*length);
+  float lineX = cos(radians(angle))*radius;
+  float lineY = sin(radians(angle))*radius;
+  line(x,y,lineX,lineY);
 }
